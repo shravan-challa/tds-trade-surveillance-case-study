@@ -191,7 +191,8 @@ def main() -> None:
     r.bold = True; r.font.size = Pt(11)
 
     bundle = [
-        ("00_executive_summary.docx",         "This document — bottom line, headline findings, ownership."),
+        ("00_executive_summary.docx",         "This document — bottom line, headline findings, ownership, productization opportunity."),
+        ("02_productization_proposal.docx",   "Standalone product pitch — four framings for turning the case study into a recurring TD surveillance capability."),
         ("stage1_profile_audit.docx",         "Stage 1 — column-by-column raw-data audit. The 'before' state, with raw-row evidence."),
         ("stage_p1_repair_report.docx",       "Stage P1 — every named normalisation rule (N1..N11), the rationale, the count of rows it touched."),
         ("stage_p2_accuracy_efficacy.docx",   "Stage P2 — surveillance-domain checks (Lineage / Lifecycle / Instrument / Account / Trader / Signatures / Statistical)."),
@@ -213,12 +214,85 @@ def main() -> None:
         cells[1].text = ""
         cells[1].paragraphs[0].add_run(what).font.size = Pt(8.5)
 
+    # ---- Productization opportunity ----------------------------------------
+    h5 = doc.add_paragraph()
+    r = h5.add_run("Productization opportunity.")
+    r.bold = True; r.font.size = Pt(11)
+
+    prod_intro = doc.add_paragraph()
+    prod_intro.add_run(
+        "This case study is a one-shot audit, but the pipeline is the prototype for a recurring "
+        "TD surveillance capability. Four framings, ordered by the team that would consume them. "
+        "The standalone "
+    )
+    prod_intro_code = prod_intro.add_run("02_productization_proposal.docx")
+    prod_intro_code.font.name = "Consolas"; prod_intro_code.font.size = Pt(9)
+    prod_intro.add_run(" expands each one with MVP scope, success metrics, and a recommended sequencing.")
+
+    framings = [
+        {
+            "name": "Vendor Feed Onboarding Service",
+            "owner": "Surveillance Data team",
+            "what": "Every new vendor / producer feed runs the pipeline before it can supply production. RAG scorecard greenlights, conditionally onboards, or blocks.",
+            "cost": "Each new feed = 4-6 wks ad-hoc engineering today; defects discovered post-launch trigger surveillance gaps + producer friction.",
+            "seq": "RECOMMENDED -- primary path",
+        },
+        {
+            "name": "Producer Trust Scorecard",
+            "owner": "Surveillance Data + Producer Mgmt",
+            "what": "Recurring re-run of the gate against active feeds. Drift below target triggers a workflow to the producer with named remediation owner.",
+            "cost": "DQ regressions in production go undetected until a surveillance alert fails to fire (JPM-class scenario).",
+            "seq": "Adjacent -- built on #1",
+        },
+        {
+            "name": "Surveillance Audit Pack",
+            "owner": "Compliance + Surveillance Data",
+            "what": "Date-range bundle of (cleaned data + scorecard + decision register + test pass log). Hand to regulators on demand.",
+            "cost": "Each audit/inquiry is a manual scramble; defensibility today is anecdotal not artefact-based.",
+            "seq": "Unlocked once #1 ships",
+        },
+        {
+            "name": "Surveillance Data SLOs",
+            "owner": "Surveillance Data + Platform Engineering",
+            "what": "M1-M7 become the first 7 SLOs. Producers sign SLAs. Pages on red. Quarterly review on amber.",
+            "cost": "DQ remains incident-driven; no contractual obligation on producers.",
+            "seq": "Culture shift -- follows #1+#2",
+        },
+    ]
+
+    pt = doc.add_table(rows=1 + len(framings), cols=4)
+    pt.style = "Light Grid Accent 1"
+    pt.autofit = False
+    for i, w in enumerate([Inches(1.7), Inches(1.7), Inches(2.7), Inches(1.4)]):
+        pt.columns[i].width = w
+    for i, h in enumerate(["Framing", "Owner / consumer", "What it does + cost of doing nothing", "Sequencing"]):
+        header_cell(pt.rows[0].cells[i], h)
+    for ri, f in enumerate(framings, start=1):
+        cells = pt.rows[ri].cells
+        cells[0].text = ""
+        r0 = cells[0].paragraphs[0].add_run(f["name"])
+        r0.bold = True; r0.font.size = Pt(8.5)
+        cells[1].text = ""
+        cells[1].paragraphs[0].add_run(f["owner"]).font.size = Pt(8.5)
+        cells[2].text = ""
+        cells[2].paragraphs[0].add_run(f["what"]).font.size = Pt(8.5)
+        cost_para = cells[2].add_paragraph()
+        cost_lbl = cost_para.add_run("Cost of doing nothing: ")
+        cost_lbl.bold = True; cost_lbl.italic = True; cost_lbl.font.size = Pt(8)
+        cost_body = cost_para.add_run(f["cost"])
+        cost_body.italic = True; cost_body.font.size = Pt(8)
+        cells[3].text = ""
+        seq_run = cells[3].paragraphs[0].add_run(f["seq"])
+        seq_run.font.size = Pt(8.5)
+        if "RECOMMENDED" in f["seq"]:
+            seq_run.bold = True
+
     # ---- Defensibility footer -----------------------------------------------
     foot = doc.add_paragraph()
     foot.add_run("Defensibility.  ").bold = True
     foot.add_run(
         "Every number in this bundle is reproducible. The analysis/ folder contains a numbered pipeline "
-        "(01..16) that regenerates every artefact from the raw CSV. Two test scripts (12, 13) assert that the "
+        "(01..17) that regenerates every artefact from the raw CSV. Two test scripts (12, 13) assert that the "
         "P1 pipeline's invariants hold and that every P2 finding count reproduces from the file. 63 tests, all passing. "
         "If a number drifts, a test breaks."
     )

@@ -15,7 +15,8 @@ A defensible, reproducible data-quality and surveillance-fitness audit of a synt
 
 | File | What's inside |
 |------|---------------|
-| `deliverable/00_executive_summary.docx` | One-page bottom line + four headline findings + ownership matrix |
+| `deliverable/00_executive_summary.docx` | One-page bottom line + four headline findings + ownership matrix + productization opportunity |
+| `deliverable/02_productization_proposal.docx` | Standalone product pitch — four framings for turning this case study into a recurring TD surveillance capability (Vendor Feed Onboarding Service / Producer Trust Scorecard / Surveillance Audit Pack / Surveillance Data SLOs), each with MVP scope, success metrics, owner; plus M1–M7 maturity model and open decisions |
 | `deliverable/stage1_profile_audit.docx` | Stage 1 — column-by-column raw-data audit, severity-coded flags, raw-line evidence |
 | `deliverable/stage_p1_repair_report.docx` | Stage P1 — every named normalisation rule (N1..N11) with rationale and rows-affected count |
 | `deliverable/stage_p2_accuracy_efficacy.docx` | Stage P2 — surveillance-domain checks, A1..G2 |
@@ -55,8 +56,9 @@ python 13_test_p2_findings.py    # 21 P2 finding reproducibility tests
 python 14_p3_metrics.py
 python 15_generate_p3_doc.py
 
-# Executive summary cover
+# Executive summary + standalone productization proposal
 python 16_generate_exec_summary.py
+python 17_generate_productization_proposal.py
 ```
 
 Every artifact (TSV, JSON, docx) regenerates without manual intervention. The pipeline outputs three TSVs that are checked in as part of the audit trail:

@@ -535,6 +535,7 @@ def reproducibility_map(doc):
         ("14_p3_metrics.py",           "P3 surveillance DQ scorecard computation → 14_p3_metrics.json (44 metrics across 7 themes M1-M7)"),
         ("15_generate_p3_doc.py",      "P3 scorecard document → deliverable/stage_p3_metrics_scorecard.docx"),
         ("16_generate_exec_summary.py", "One-page Executive Summary cover → deliverable/00_executive_summary.docx"),
+        ("17_generate_productization_proposal.py", "Standalone Productization Proposal → deliverable/02_productization_proposal.docx (turns the case study into a recurring TD capability — 4 framings + maturity model + open decisions)"),
     ])
     p(doc, "Pinned versions: Python 3.14.0 · pandas 3.0.2 · numpy 2.4.4 · python-docx 1.2.0", size=9, italic=True)
 
