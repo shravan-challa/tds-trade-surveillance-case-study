@@ -1,0 +1,229 @@
+{
+  "A1": {
+    "theme": "A. Lineage",
+    "name": "Orphaned LinkMessageId (references a MessageId that doesn't exist in the file)",
+    "rationale": "Cancel/Replace/Fill events reference an upstream message via LinkMessageId. If that reference is unresolvable, the surveillance system cannot reconstruct the order lifecycle and any rule that depends on the chain (e.g., 'cancels before fills') silently fails.",
+    "detection": "LinkMessageId is non-empty AND not present in the set of MessageIds in this file.",
+    "count": 8162,
+    "pct_of_link_set": 5.73
+  },
+  "A2": {
+    "theme": "A. Lineage",
+    "name": "Orphaned ParentOrderId (references a MessageId that doesn't exist in the file)",
+    "rationale": "ParentOrderId points to the root parent New Order. A missing parent breaks aggregate-volume checks ('Fill total <= parent volume'), which is the textbook surveillance check for execution integrity.",
+    "detection": "ParentOrderId is non-empty AND not present in MessageIds.",
+    "count": 14125,
+    "pct_of_parent_set": 9.92
+  },
+  "A3": {
+    "theme": "A. Lineage",
+    "name": "Child message (Cancel/Replace/Fill/Reject) with NO upstream reference",
+    "rationale": "A cancel without a referenced order, or a fill without a parent, is unattributable \u2014 surveillance cannot tell which order it belongs to. In a regulator audit this is the kind of completeness gap that fails an exam.",
+    "detection": "MessageType \u2208 {Cancel Order, Replace Order, Fill, Reject} AND both LinkMessageId and ParentOrderId are null.",
+    "count": 0,
+    "pct_of_child_messages": 0.0
+  },
+  "A4": {
+    "theme": "A. Lineage",
+    "name": "New Order carrying a LinkMessageId or ParentOrderId",
+    "rationale": "A 'New Order' by definition has no upstream parent in this schema. Carrying a parent reference is either schema misuse or column-shift residue.",
+    "detection": "MessageType == 'New Order' AND (LinkMessageId or ParentOrderId is non-empty).",
+    "count": 5142
+  },
+  "B1": {
+    "theme": "B. Order lifecycle",
+    "name": "Child event occurs BEFORE its referenced parent New Order",
+    "rationale": "Time-travel impossible \u2014 a cancel/fill cannot precede the order it acts on. Such rows indicate either timestamp corruption or a misassigned parent reference. Either way, the surveillance lifecycle reconstruction is broken for those rows.",
+    "detection": "Child has a resolvable parent timestamp AND child.TransactionTime < parent.TransactionTime.",
+    "count": 7767,
+    "pct_of_resolvable_children": 6.06
+  },
+  "B2": {
+    "theme": "B. Order lifecycle",
+    "name": "Aggregate Fill volume per parent exceeds parent's TotalVolume",
+    "rationale": "The textbook execution-integrity check. Filling more than was ordered is impossible on a single trading line \u2014 every regulator exam will look at this. Surfacing this on the synthetic data demonstrates the check is wired.",
+    "detection": "Sum of Fill.TotalVolume grouped by parent MessageId > parent.TotalVolume.",
+    "count": 1748,
+    "max_over_fill_pct": 12500.0,
+    "median_over_fill_pct": 6.25
+  },
+  "B3": {
+    "theme": "B. Order lifecycle",
+    "name": "Fill recorded AFTER its parent order was Cancelled",
+    "rationale": "A fill on a cancelled order is a surveillance red flag \u2014 it may reflect a genuine race condition (legit edge case to investigate) or fabricated execution data. Either way the surveillance system needs to know.",
+    "detection": "Fill.TransactionTime > min(Cancel.TransactionTime for same parent).",
+    "count": 1286
+  },
+  "B4": {
+    "theme": "B. Order lifecycle",
+    "name": "Replace Order without a resolvable parent",
+    "rationale": "Replace is meaningless without the order it's replacing \u2014 surveillance can't compare old vs new price/quantity.",
+    "detection": "MessageType == 'Replace Order' AND parent reference does not resolve to a parent New Order.",
+    "count": 509,
+    "pct_of_replaces": 9.9
+  },
+  "C1": {
+    "theme": "C. Instrument/ISIN",
+    "name": "Instrument mapped to multiple ISINs",
+    "rationale": "A symbol-to-ISIN mapping is supposed to be stable within a trading session. Many-to-one or one-to-many breaks every per-instrument rule (price outlier, position aggregation, market-data join).",
+    "detection": "Per Instrument: nunique(ISIN) > 1.",
+    "count": 222,
+    "total_instruments": 250,
+    "top_examples": {
+      "OO": 4528,
+      "YAZ": 1553,
+      "YV": 836,
+      "SZY": 553,
+      "HN": 387
+    }
+  },
+  "C2": {
+    "theme": "C. Instrument/ISIN",
+    "name": "ISIN mapped to multiple Instruments",
+    "rationale": "Same reverse problem \u2014 a single ISIN should resolve to a single ticker on a given venue/day.",
+    "detection": "Per ISIN: nunique(Instrument) > 1.",
+    "count": 0,
+    "total_isins": 11277,
+    "top_examples": {
+      "US001YXDDMI9": 1,
+      "US00348H5I28": 1,
+      "US003AZAD4E6": 1,
+      "US0050UV8TQ8": 1,
+      "US00ALGATHJ6": 1
+    }
+  },
+  "D1": {
+    "theme": "D. Account/Firm",
+    "name": "Account \u2261 CounterPartyFirm (self-trade signature)",
+    "rationale": "Same Account on both sides is normal for prop trading desks (PROP prefix) but is a wash-trade signature on agency flow (CLNT, BRKR, INST prefixes). Cross-tab is the surveillance read.",
+    "detection": "Account string identical to CounterPartyFirm string AND both non-null.",
+    "count": 236043,
+    "prefix_breakdown": {
+      "PROP": 86245,
+      "INST": 55597,
+      "BANK": 25098,
+      "CLNT": 16449,
+      "FIRM": 14839,
+      "HEDG": 14131,
+      "BRKR": 12880,
+      "ALGO": 5300,
+      "FUND": 3354,
+      "DESK": 2150
+    }
+  },
+  "D1b": {
+    "theme": "D. Account/Firm",
+    "name": "Non-PROP Account self-crossing (potential wash-trade signature)",
+    "rationale": "A PROP-prefixed account self-crossing is legitimate prop activity. A CLNT/BRKR/INST account self-crossing should be reviewed \u2014 wash-trade rules trigger here.",
+    "detection": "Self-cross rows where Account prefix is not 'PROP'.",
+    "count": 149798
+  },
+  "E1": {
+    "theme": "E. Trader",
+    "name": "Fill without attributed Trader",
+    "rationale": "Regulators require human attribution on executions. A Fill with no Trader is unattributable to a person and breaks Reg-best-execution / market-abuse-attribution requirements.",
+    "detection": "MessageType == 'Fill' AND Trader is null.",
+    "count": 39115,
+    "pct_of_fills": 64.87,
+    "trader_pct_by_msgtype": {
+      "Cancel Order": {
+        "with_trader_pct": 35.12,
+        "rows": 71846
+      },
+      "Fill": {
+        "with_trader_pct": 35.13,
+        "rows": 60299
+      },
+      "New Order": {
+        "with_trader_pct": 35.25,
+        "rows": 105142
+      },
+      "Replace Order": {
+        "with_trader_pct": 36.17,
+        "rows": 5142
+      }
+    }
+  },
+  "F1": {
+    "theme": "F. Surveillance signatures",
+    "name": "High cancel-to-new-order ratio per Trader",
+    "rationale": "A persistent cancel ratio > 1 (more cancels than new orders) is the classic spoofing/layering signature \u2014 the Trader is posting orders to influence price with no intention of executing, then pulling them. Rule-of-thumb threshold: >5x for sustained activity is concerning; we surface the top-N for review.",
+    "detection": "Group by Trader: count(Cancel Order) / count(New Order). Sort desc.",
+    "count": 0,
+    "top_10_traders_by_cancel_ratio": {
+      "TRD_2": {
+        "new_orders": 421,
+        "cancels": 305,
+        "ratio": 0.72
+      },
+      "TRD_19": {
+        "new_orders": 390,
+        "cancels": 278,
+        "ratio": 0.71
+      },
+      "TRD_4": {
+        "new_orders": 1026,
+        "cancels": 718,
+        "ratio": 0.7
+      },
+      "TRD_17": {
+        "new_orders": 411,
+        "cancels": 287,
+        "ratio": 0.7
+      },
+      "TRD_16": {
+        "new_orders": 710,
+        "cancels": 490,
+        "ratio": 0.69
+      },
+      "TRD_15": {
+        "new_orders": 2443,
+        "cancels": 1674,
+        "ratio": 0.69
+      },
+      "TRD_14": {
+        "new_orders": 946,
+        "cancels": 648,
+        "ratio": 0.68
+      },
+      "TRD_18": {
+        "new_orders": 461,
+        "cancels": 315,
+        "ratio": 0.68
+      },
+      "TRD_3": {
+        "new_orders": 3614,
+        "cancels": 2469,
+        "ratio": 0.68
+      },
+      "TRD_1": {
+        "new_orders": 609,
+        "cancels": 416,
+        "ratio": 0.68
+      }
+    }
+  },
+  "F2": {
+    "theme": "F. Surveillance signatures",
+    "name": "Wash-trade signature \u2014 same Account, opposite sides on same Instrument within 5s",
+    "rationale": "A Buy and a Sell on the same Account+Instrument within seconds is the textbook wash-trade pattern. This rule is mandatory under Reg-NMS / MiFID-II market abuse regimes.",
+    "detection": "Group fills by (Account, Instrument), sort by time. Flag consecutive rows where side flips AND \u0394time \u2264 5s.",
+    "count": 4632,
+    "pct_of_fills_with_account_and_instrument": 7.68
+  },
+  "G1": {
+    "theme": "G. Statistical",
+    "name": "Price outliers (per-instrument IQR fence, 3x)",
+    "rationale": "A surveillance system needs to flag prices that don't make sense given the rest of the same-instrument activity (fat-finger; off-market prints; bad market-data). The 3*IQR fence is a conservative non-parametric outlier definition.",
+    "detection": "For each Instrument with valid Price>0, compute Q1, Q3, IQR. Flag rows where Price \u2209 [Q1-3\u00b7IQR, Q3+3\u00b7IQR].",
+    "count": 61236,
+    "pct_of_priced_fills": 45.71
+  },
+  "G2": {
+    "theme": "G. Statistical",
+    "name": "Volume outliers (per-instrument upper IQR fence, 3x)",
+    "rationale": "A single block dramatically larger than the typical size for that instrument should be inspected \u2014 could be a legit block but might also be a fat-finger or marking-the-close trade.",
+    "detection": "For each Instrument with valid Volume>0, flag rows where Volume > Q3 + 3\u00b7IQR.",
+    "count": 40
+  }
+}

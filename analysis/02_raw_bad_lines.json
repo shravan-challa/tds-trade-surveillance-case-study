@@ -1,0 +1,106 @@
+{
+  "bad_field_count_examples": [
+    {
+      "line_number": 15,
+      "field_count": 8,
+      "first_500_chars": "XFKB , New Order , 2026-02-05T08:00:05.996Z , 2026-02-05 , 2026-02-05.RT020.P.15 ,  ,  , \""
+    },
+    {
+      "line_number": 16,
+      "field_count": 11,
+      "first_500_chars": "LJ\" , USUJGWJM9EI1 , Buy , 0.0 , 9200 , CLNT2.PEAKVAULT , CLNT2.PEAKVAULT ,  , SYS_OMEGA , USD , "
+    },
+    {
+      "line_number": 33,
+      "field_count": 8,
+      "first_500_chars": "XFKB , New Order , 2026-02-05T08:00:11.486Z , 2026-02-05 , 2026-02-05.RT024.P.31 ,  ,  , \""
+    },
+    {
+      "line_number": 34,
+      "field_count": 11,
+      "first_500_chars": "OO\" , USRT0JJC8GX7 , Sell , 0.0 , 3400 , PROP95.VAULTVAULT , PROP95.VAULTVAULT ,  , SYS_OMEGA , USD , "
+    },
+    {
+      "line_number": 40,
+      "field_count": 19,
+      "first_500_chars": "XFKB , New Order , 2026-02-05T08:00:13.698Z , 2026-02-05 , 2026-02-05.RT006.P.38029 ,  ,  , OO , USRT0JJC8GX7 , Sell , 0.0 , \"1,050\" , PROP95.VAULTVAULT , PROP95.VAULTVAULT ,  , SYS_OMEGA , USD , "
+    },
+    {
+      "line_number": 44,
+      "field_count": 8,
+      "first_500_chars": "XFKA , New Order , 2026-02-05T08:00:14.570Z , 2026-02-05 , 2026-02-05.RT006.P.44 ,  ,  , \"KRJS  "
+    },
+    {
+      "line_number": 45,
+      "field_count": 1,
+      "first_500_chars": " , USKGV1OINAL2 , Buy , 0.0 , 100 , PROP95.VAULTVAULT , PROP95.VAULTVAULT , NaN , SYS_OMEGA , USD , \r\nNULL , New Order , 2026-02-05T08:00:14.635Z , 2026-02-05 , 2026-02-05.RT024.P.39 ,  ,  , OO , USRT0JJC8GX7 , Buy , 0.0 , 500 , INST11.FLUXBETA , INST11.FLUXBETA , TRD_8 , SYS_OMEGA , USD , \r\nXFKB , New Order , 2026-02-05T08:00:15.010Z , 2026-02-05 , 2026-02-05.RT019.P.42 ,  ,  , OO , USRT0JJC8GX7 , Buy , 0.0 , 500 , BANK86.FLUXPEAK , BANK86.FLUXPEAK , NaN , SYS_OMEGA , USD , \r\nXFKA , New Order ,"
+    },
+    {
+      "line_number": 46,
+      "field_count": 11,
+      "first_500_chars": "YAZ\" , USXA1VKK5GS6 , Sell , 0.0 , 7350 , BRKR36.NOVAPEAK , BRKR36.NOVAPEAK , TRD_7 , SYS_OMEGA , USD , "
+    },
+    {
+      "line_number": 84,
+      "field_count": 8,
+      "first_500_chars": "XFKB , New Order , 2026-02-05T08:00:28.773Z , 2026-02-05 , 2026-02-05.RT002.P.82 ,  ,  , \""
+    },
+    {
+      "line_number": 85,
+      "field_count": 1,
+      "first_500_chars": "OO"
+    }
+  ],
+  "odd_quote_examples": [
+    {
+      "line_number": 15,
+      "quote_count": 1,
+      "line_text": "XFKB , New Order , 2026-02-05T08:00:05.996Z , 2026-02-05 , 2026-02-05.RT020.P.15 ,  ,  , \""
+    },
+    {
+      "line_number": 16,
+      "quote_count": 1,
+      "line_text": "LJ\" , USUJGWJM9EI1 , Buy , 0.0 , 9200 , CLNT2.PEAKVAULT , CLNT2.PEAKVAULT ,  , SYS_OMEGA , USD , "
+    },
+    {
+      "line_number": 33,
+      "quote_count": 1,
+      "line_text": "XFKB , New Order , 2026-02-05T08:00:11.486Z , 2026-02-05 , 2026-02-05.RT024.P.31 ,  ,  , \""
+    },
+    {
+      "line_number": 34,
+      "quote_count": 1,
+      "line_text": "OO\" , USRT0JJC8GX7 , Sell , 0.0 , 3400 , PROP95.VAULTVAULT , PROP95.VAULTVAULT ,  , SYS_OMEGA , USD , "
+    },
+    {
+      "line_number": 44,
+      "quote_count": 1,
+      "line_text": "XFKA , New Order , 2026-02-05T08:00:14.570Z , 2026-02-05 , 2026-02-05.RT006.P.44 ,  ,  , \"KRJS  "
+    },
+    {
+      "line_number": 45,
+      "quote_count": 1,
+      "line_text": "\" , USKGV1OINAL2 , Buy , 0.0 , 100 , PROP95.VAULTVAULT , PROP95.VAULTVAULT , NaN , SYS_OMEGA , USD , "
+    },
+    {
+      "line_number": 55,
+      "quote_count": 1,
+      "line_text": "XFKA , New Order , 2026-02-05T08:00:19.154Z , 2026-02-05 , 2026-02-05.RT016.P.50 ,  ,  , \"  "
+    },
+    {
+      "line_number": 56,
+      "quote_count": 1,
+      "line_text": "YAZ\" , USXA1VKK5GS6 , Sell , 0.0 , 7350 , BRKR36.NOVAPEAK , BRKR36.NOVAPEAK , TRD_7 , SYS_OMEGA , USD , "
+    },
+    {
+      "line_number": 94,
+      "quote_count": 1,
+      "line_text": "XFKB , New Order , 2026-02-05T08:00:28.773Z , 2026-02-05 , 2026-02-05.RT002.P.82 ,  ,  , \""
+    },
+    {
+      "line_number": 96,
+      "quote_count": 1,
+      "line_text": "\" , USRT0JJC8GX7 , Buy , 0.0 , 100 , PROP95.VAULTVAULT , PROP95.VAULTVAULT ,  , SYS_OMEGA , USD , "
+    }
+  ]
+}

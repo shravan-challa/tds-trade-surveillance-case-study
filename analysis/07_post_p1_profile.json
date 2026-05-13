@@ -1,0 +1,349 @@
+{
+  "stage1_parsed_rows": 146304,
+  "stage1_raw_data_lines": 250714,
+  "stage1_csv_malformed": 104410,
+  "p1_rows": 242429,
+  "p1_recovered_vs_stage1": 96125,
+  "p1_parse_rate_vs_raw_pct": 96.7,
+  "columns": {
+    "ExchangeId": {
+      "stage1": {
+        "pct_empty": 0.0,
+        "pct_whitespace_padding": 99.268,
+        "suspect_null_tokens_total": 809,
+        "nunique": 1158
+      },
+      "p1": {
+        "pct_null": 1.693,
+        "n_null": 4105,
+        "nunique": 20
+      },
+      "delta": {
+        "pct_whitespace_padding_change": -99.27,
+        "nunique_change": -1138
+      }
+    },
+    "MessageType": {
+      "stage1": {
+        "pct_empty": 0.0,
+        "pct_whitespace_padding": 97.975,
+        "suspect_null_tokens_total": 0,
+        "nunique": 822
+      },
+      "p1": {
+        "pct_null": 0.0,
+        "n_null": 0,
+        "nunique": 4
+      },
+      "delta": {
+        "pct_whitespace_padding_change": -97.97,
+        "nunique_change": -818
+      }
+    },
+    "TransactionTime": {
+      "stage1": {
+        "pct_empty": 0.0,
+        "pct_whitespace_padding": 97.975,
+        "suspect_null_tokens_total": 0,
+        "nunique": 140934
+      },
+      "p1": {
+        "pct_null": 0.0,
+        "n_null": 0,
+        "nunique": 241785
+      },
+      "delta": {
+        "pct_whitespace_padding_change": -97.97,
+        "nunique_change": 100851
+      }
+    },
+    "MessageDate": {
+      "stage1": {
+        "pct_empty": 0.0,
+        "pct_whitespace_padding": 97.975,
+        "suspect_null_tokens_total": 0,
+        "nunique": 589
+      },
+      "p1": {
+        "pct_null": 0.0,
+        "n_null": 0,
+        "nunique": 2
+      },
+      "delta": {
+        "pct_whitespace_padding_change": -97.97,
+        "nunique_change": -587
+      }
+    },
+    "MessageId": {
+      "stage1": {
+        "pct_empty": 0.0,
+        "pct_whitespace_padding": 97.975,
+        "suspect_null_tokens_total": 2766,
+        "nunique": 135986
+      },
+      "p1": {
+        "pct_null": 1.944,
+        "n_null": 4714,
+        "nunique": 228799
+      },
+      "delta": {
+        "pct_whitespace_padding_change": -97.97,
+        "nunique_change": 92813
+      }
+    },
+    "LinkMessageId": {
+      "stage1": {
+        "pct_empty": 0.0,
+        "pct_whitespace_padding": 97.975,
+        "suspect_null_tokens_total": 58053,
+        "nunique": 64125
+      },
+      "p1": {
+        "pct_null": 41.249,
+        "n_null": 100000,
+        "nunique": 94939
+      },
+      "delta": {
+        "pct_whitespace_padding_change": -97.97,
+        "nunique_change": 30814
+      }
+    },
+    "ParentOrderId": {
+      "stage1": {
+        "pct_empty": 0.0,
+        "pct_whitespace_padding": 97.975,
+        "suspect_null_tokens_total": 58053,
+        "nunique": 65570
+      },
+      "p1": {
+        "pct_null": 41.249,
+        "n_null": 100000,
+        "nunique": 98279
+      },
+      "delta": {
+        "pct_whitespace_padding_change": -97.97,
+        "nunique_change": 32709
+      }
+    },
+    "Instrument": {
+      "stage1": {
+        "pct_empty": 0.0,
+        "pct_whitespace_padding": 97.975,
+        "suspect_null_tokens_total": 1319,
+        "nunique": 373
+      },
+      "p1": {
+        "pct_null": 0.0,
+        "n_null": 0,
+        "nunique": 250
+      },
+      "delta": {
+        "pct_whitespace_padding_change": -97.97,
+        "nunique_change": -123
+      }
+    },
+    "ISIN": {
+      "stage1": {
+        "pct_empty": 0.0,
+        "pct_whitespace_padding": 95.47,
+        "suspect_null_tokens_total": 6,
+        "nunique": 6587
+      },
+      "p1": {
+        "pct_null": 0.0,
+        "n_null": 0,
+        "nunique": 11277
+      },
+      "delta": {
+        "pct_whitespace_padding_change": -95.47,
+        "nunique_change": 4690
+      }
+    },
+    "BuyOrSell": {
+      "stage1": {
+        "pct_empty": 0.0,
+        "pct_whitespace_padding": 95.47,
+        "suspect_null_tokens_total": 0,
+        "nunique": 4
+      },
+      "p1": {
+        "pct_null": 0.0,
+        "n_null": 0,
+        "nunique": 2
+      },
+      "delta": {
+        "pct_whitespace_padding_change": -95.47,
+        "nunique_change": -2
+      }
+    },
+    "Price": {
+      "stage1": {
+        "pct_empty": 0.0,
+        "pct_whitespace_padding": 95.47,
+        "suspect_null_tokens_total": 2051,
+        "nunique": 31752
+      },
+      "p1": {
+        "pct_null": 2.458,
+        "n_null": 5959,
+        "nunique": 44882
+      },
+      "delta": {
+        "pct_whitespace_padding_change": -95.47,
+        "nunique_change": 13130
+      }
+    },
+    "TotalVolume": {
+      "stage1": {
+        "pct_empty": 0.0,
+        "pct_whitespace_padding": 94.068,
+        "suspect_null_tokens_total": 11,
+        "nunique": 4837
+      },
+      "p1": {
+        "pct_null": 1.197,
+        "n_null": 2902,
+        "nunique": 5752
+      },
+      "delta": {
+        "pct_whitespace_padding_change": -94.07,
+        "nunique_change": 915
+      }
+    },
+    "Account": {
+      "stage1": {
+        "pct_empty": 0.0,
+        "pct_whitespace_padding": 94.06,
+        "suspect_null_tokens_total": 0,
+        "nunique": 1043
+      },
+      "p1": {
+        "pct_null": 0.0,
+        "n_null": 0,
+        "nunique": 1744
+      },
+      "delta": {
+        "pct_whitespace_padding_change": -94.06,
+        "nunique_change": 701
+      }
+    },
+    "CounterPartyFirm": {
+      "stage1": {
+        "pct_empty": 0.0,
+        "pct_whitespace_padding": 94.06,
+        "suspect_null_tokens_total": 0,
+        "nunique": 100
+      },
+      "p1": {
+        "pct_null": 0.0,
+        "n_null": 0,
+        "nunique": 100
+      },
+      "delta": {
+        "pct_whitespace_padding_change": -94.06,
+        "nunique_change": 0
+      }
+    },
+    "Trader": {
+      "stage1": {
+        "pct_empty": 0.0,
+        "pct_whitespace_padding": 94.06,
+        "suspect_null_tokens_total": 89086,
+        "nunique": 20
+      },
+      "p1": {
+        "pct_null": 64.8,
+        "n_null": 157093,
+        "nunique": 19
+      },
+      "delta": {
+        "pct_whitespace_padding_change": -94.06,
+        "nunique_change": -1
+      }
+    },
+    "TransactionSource": {
+      "stage1": {
+        "pct_empty": 0.0,
+        "pct_whitespace_padding": 94.06,
+        "suspect_null_tokens_total": 0,
+        "nunique": 1
+      },
+      "p1": {
+        "pct_null": 0.0,
+        "n_null": 0,
+        "nunique": 1
+      },
+      "delta": {
+        "pct_whitespace_padding_change": -94.06,
+        "nunique_change": 0
+      }
+    },
+    "Currency": {
+      "stage1": {
+        "pct_empty": 0.0,
+        "pct_whitespace_padding": 94.06,
+        "suspect_null_tokens_total": 0,
+        "nunique": 1
+      },
+      "p1": {
+        "pct_null": 0.0,
+        "n_null": 0,
+        "nunique": 1
+      },
+      "delta": {
+        "pct_whitespace_padding_change": -94.06,
+        "nunique_change": 0
+      }
+    },
+    "Flags": {
+      "stage1": {
+        "pct_empty": 0.0,
+        "pct_whitespace_padding": 94.06,
+        "suspect_null_tokens_total": 130991,
+        "nunique": 1
+      },
+      "p1": {
+        "pct_null": 95.288,
+        "n_null": 231005,
+        "nunique": 1
+      },
+      "delta": {
+        "pct_whitespace_padding_change": -94.06,
+        "nunique_change": 0
+      }
+    }
+  },
+  "row_health": {
+    "total_rows": 242429,
+    "rows_with_any_flag": 240302,
+    "pct_rows_with_any_flag": 99.12,
+    "rows_clean": 2127,
+    "pct_rows_clean": 0.88,
+    "flag_counts": {
+      "FLAG_NULL_ExchangeId": 4105,
+      "FLAG_NULL_MessageId": 4714,
+      "FLAG_NULL_LinkMessageId": 100000,
+      "FLAG_NULL_ParentOrderId": 100000,
+      "FLAG_NULL_Trader": 157093,
+      "FLAG_NULL_Flags": 231005,
+      "FLAG_MT_CASE": 7476,
+      "FLAG_MT_UNKNOWN_ENUM": 0,
+      "FLAG_DATE_REFORMATTED": 7629,
+      "FLAG_DATE_UNPARSABLE": 0,
+      "FLAG_TT_NOT_ISO": 0,
+      "FLAG_PK_INVALID": 0,
+      "FLAG_PK_NULL": 4714,
+      "FLAG_PK_DUPLICATE": 17671,
+      "FLAG_ISIN_INVALID": 0,
+      "FLAG_SIDE_INVALID": 0,
+      "FLAG_PRICE_UNPARSABLE": 15,
+      "FLAG_PRICE_NEGATIVE": 5944,
+      "FLAG_VOL_UNPARSABLE": 1388,
+      "FLAG_VOL_NONPOSITIVE": 1514,
+      "FLAG_ACCOUNT_FORMAT": 6386,
+      "FLAG_CPTY_FORMAT": 0,
+      "FLAG_TRADER_FORMAT": 0,
+      "FLAG_EXCH_FORMAT": 2688
+    }
+  }
+}

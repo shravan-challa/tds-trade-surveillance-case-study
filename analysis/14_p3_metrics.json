@@ -1,0 +1,534 @@
+{
+  "generated_at": "2026-05-13",
+  "input_records": 242429,
+  "raw_data_lines": 250714,
+  "themes": {
+    "M1 \u2014 Ingestion completeness": {
+      "metrics": [
+        {
+          "id": "M1.1",
+          "name": "Raw data line count",
+          "definition": "Universal-newline line count of the source CSV minus the header row.",
+          "value": 250714,
+          "unit": "records",
+          "target": "n/a (input volume)",
+          "status": "GREEN",
+          "owner": "Producer",
+          "rationale": "Anchor for every downstream completeness ratio. Without an authoritative raw count, no ingestion KPI is defensible."
+        },
+        {
+          "id": "M1.2",
+          "name": "Records ingested after P1 repair",
+          "definition": "Rows in cleaned_p1_final.tsv after structural repair + value normalisation.",
+          "value": 242429,
+          "unit": "records",
+          "target": "238,178 (>=95% of raw lines)",
+          "status": "GREEN",
+          "owner": "Both",
+          "rationale": "Records the surveillance system actually sees. Direct analogue to the JPM-case completeness gap."
+        },
+        {
+          "id": "M1.3",
+          "name": "Parse rate vs raw lines",
+          "definition": "M1.2 / M1.1 * 100. The headline ingestion KPI.",
+          "value": 96.7,
+          "unit": "pct",
+          "target": ">= 95.0%",
+          "status": "GREEN",
+          "owner": "Both",
+          "rationale": "If this is below 95% the vendor will silently drop records. The remaining 3.30% on this dataset are continuation lines absorbed into multi-line cells (NOT lost)."
+        },
+        {
+          "id": "M1.4",
+          "name": "Quarantine bucket size after P1",
+          "definition": "Rows that the P1 pipeline could not repair and chose to quarantine for manual review.",
+          "value": 0,
+          "unit": "records",
+          "target": "0",
+          "status": "GREEN",
+          "owner": "Surveillance team",
+          "rationale": "Quarantined records are deferred surveillance gaps \u2014 every quarantined row is a row no rule will fire on."
+        },
+        {
+          "id": "M1.5",
+          "name": "Bare-CR lines (silent-drop risk)",
+          "definition": "Lines terminated by a bare \\r rather than \\r\\n. Strict-LF readers (some legacy Java/C parsers, Unix wc) silently miss these.",
+          "value": 4193,
+          "unit": "records",
+          "target": "0 in the FUTURE (producer should emit CRLF only)",
+          "status": "AMBER",
+          "owner": "Producer",
+          "rationale": "On THIS file the P1 pipeline normalises bare-CR -> CRLF, so no records are lost downstream. But the producer should fix the line-ending mix at source so every consumer sees the same record count."
+        },
+        {
+          "id": "M1.6",
+          "name": "CRLF-terminated lines",
+          "definition": "Lines terminated by \\r\\n (standard Windows + RFC-4180 expectation).",
+          "value": 246522,
+          "unit": "records",
+          "target": "n/a (input characteristic)",
+          "status": "GREEN",
+          "owner": "Producer",
+          "rationale": "Reported alongside M1.5 so a reader can reconcile any line-counting tool against the file."
+        }
+      ]
+    },
+    "M2 \u2014 Field-level completeness": {
+      "metrics": [
+        {
+          "id": "M2.ExchangeId",
+          "name": "ExchangeId populated rate",
+          "definition": "100 - (nulls in ExchangeId / total rows * 100)",
+          "value": 98.31,
+          "unit": "pct",
+          "target": ">= 99.0% populated",
+          "status": "AMBER",
+          "owner": "Producer",
+          "rationale": "Required for venue-level surveillance + best-execution analysis."
+        },
+        {
+          "id": "M2.MessageType",
+          "name": "MessageType populated rate",
+          "definition": "100 - (nulls in MessageType / total rows * 100)",
+          "value": 100.0,
+          "unit": "pct",
+          "target": ">= 100.0% populated",
+          "status": "GREEN",
+          "owner": "Producer",
+          "rationale": "Cannot route a row to a surveillance rule without knowing what kind of event it is."
+        },
+        {
+          "id": "M2.TransactionTime",
+          "name": "TransactionTime populated rate",
+          "definition": "100 - (nulls in TransactionTime / total rows * 100)",
+          "value": 100.0,
+          "unit": "pct",
+          "target": ">= 100.0% populated",
+          "status": "GREEN",
+          "owner": "Producer",
+          "rationale": "Required for every time-windowed rule (cancel ratios, wash-trade timing, lifecycle ordering)."
+        },
+        {
+          "id": "M2.MessageDate",
+          "name": "MessageDate populated rate",
+          "definition": "100 - (nulls in MessageDate / total rows * 100)",
+          "value": 100.0,
+          "unit": "pct",
+          "target": ">= 100.0% populated",
+          "status": "GREEN",
+          "owner": "Producer",
+          "rationale": "Partition key for trading-day surveillance scope."
+        },
+        {
+          "id": "M2.MessageId",
+          "name": "MessageId populated rate",
+          "definition": "100 - (nulls in MessageId / total rows * 100)",
+          "value": 98.06,
+          "unit": "pct",
+          "target": ">= 100.0% populated",
+          "status": "RED",
+          "owner": "Producer",
+          "rationale": "Primary key. Nulls cannot be deduplicated, reconciled, or referenced by Cancel/Fill events."
+        },
+        {
+          "id": "M2.LinkMessageId",
+          "name": "LinkMessageId populated rate",
+          "definition": "100 - (nulls in LinkMessageId / total rows * 100)",
+          "value": 58.75,
+          "unit": "pct",
+          "target": "n/a (optional field)",
+          "status": "GREEN",
+          "owner": "Producer",
+          "rationale": "Optional \u2014 null is valid for parent New Orders. Only flagged when populated AND unresolvable (see M3.1)."
+        },
+        {
+          "id": "M2.ParentOrderId",
+          "name": "ParentOrderId populated rate",
+          "definition": "100 - (nulls in ParentOrderId / total rows * 100)",
+          "value": 58.75,
+          "unit": "pct",
+          "target": "n/a (optional field)",
+          "status": "GREEN",
+          "owner": "Producer",
+          "rationale": "Optional \u2014 null is valid for parent New Orders. Only flagged when populated AND unresolvable (see M3.2)."
+        },
+        {
+          "id": "M2.Instrument",
+          "name": "Instrument populated rate",
+          "definition": "100 - (nulls in Instrument / total rows * 100)",
+          "value": 100.0,
+          "unit": "pct",
+          "target": ">= 100.0% populated",
+          "status": "GREEN",
+          "owner": "Producer",
+          "rationale": "Required for every per-instrument rule (price outlier, position aggregation)."
+        },
+        {
+          "id": "M2.ISIN",
+          "name": "ISIN populated rate",
+          "definition": "100 - (nulls in ISIN / total rows * 100)",
+          "value": 100.0,
+          "unit": "pct",
+          "target": ">= 100.0% populated",
+          "status": "GREEN",
+          "owner": "Producer",
+          "rationale": "Required for cross-venue / cross-system instrument joins."
+        },
+        {
+          "id": "M2.BuyOrSell",
+          "name": "BuyOrSell populated rate",
+          "definition": "100 - (nulls in BuyOrSell / total rows * 100)",
+          "value": 100.0,
+          "unit": "pct",
+          "target": ">= 100.0% populated",
+          "status": "GREEN",
+          "owner": "Producer",
+          "rationale": "Required for wash-trade detection, position direction, side-imbalance rules."
+        },
+        {
+          "id": "M2.Price",
+          "name": "Price populated rate",
+          "definition": "100 - (nulls in Price / total rows * 100)",
+          "value": 97.54,
+          "unit": "pct",
+          "target": ">= 99.0% populated",
+          "status": "AMBER",
+          "owner": "Producer",
+          "rationale": "Required for price-outlier detection + best-execution. Some Cancel events may legitimately omit price; investigate the breakdown."
+        },
+        {
+          "id": "M2.TotalVolume",
+          "name": "TotalVolume populated rate",
+          "definition": "100 - (nulls in TotalVolume / total rows * 100)",
+          "value": 98.8,
+          "unit": "pct",
+          "target": ">= 99.0% populated",
+          "status": "AMBER",
+          "owner": "Producer",
+          "rationale": "Required for over-fill detection + position size + block-trade flagging."
+        },
+        {
+          "id": "M2.Account",
+          "name": "Account populated rate",
+          "definition": "100 - (nulls in Account / total rows * 100)",
+          "value": 100.0,
+          "unit": "pct",
+          "target": ">= 100.0% populated",
+          "status": "GREEN",
+          "owner": "Producer",
+          "rationale": "Required for account-level wash-trade and position-limit rules."
+        },
+        {
+          "id": "M2.CounterPartyFirm",
+          "name": "CounterPartyFirm populated rate",
+          "definition": "100 - (nulls in CounterPartyFirm / total rows * 100)",
+          "value": 100.0,
+          "unit": "pct",
+          "target": ">= 100.0% populated",
+          "status": "GREEN",
+          "owner": "Producer",
+          "rationale": "Required for inter-firm market-abuse detection + counterparty risk."
+        },
+        {
+          "id": "M2.Trader",
+          "name": "Trader populated rate",
+          "definition": "100 - (nulls in Trader / total rows * 100)",
+          "value": 35.2,
+          "unit": "pct",
+          "target": ">= 100.0% populated",
+          "status": "RED",
+          "owner": "Producer",
+          "rationale": "Reg-best-execution + MAR market-abuse attribution. Currently 64.87% of FILLS lack a Trader (see M6)."
+        },
+        {
+          "id": "M2.TransactionSource",
+          "name": "TransactionSource populated rate",
+          "definition": "100 - (nulls in TransactionSource / total rows * 100)",
+          "value": 100.0,
+          "unit": "pct",
+          "target": ">= 100.0% populated",
+          "status": "GREEN",
+          "owner": "Producer",
+          "rationale": "Required for source attribution if the surveillance system aggregates multiple feeds."
+        },
+        {
+          "id": "M2.Currency",
+          "name": "Currency populated rate",
+          "definition": "100 - (nulls in Currency / total rows * 100)",
+          "value": 100.0,
+          "unit": "pct",
+          "target": ">= 100.0% populated",
+          "status": "GREEN",
+          "owner": "Producer",
+          "rationale": "Required for FX normalisation if multi-currency."
+        },
+        {
+          "id": "M2.Flags",
+          "name": "Flags populated rate",
+          "definition": "100 - (nulls in Flags / total rows * 100)",
+          "value": 4.71,
+          "unit": "pct",
+          "target": "n/a (optional field)",
+          "status": "GREEN",
+          "owner": "Producer",
+          "rationale": "Optional \u2014 present only on exception messages. Null is the expected state on the majority of rows."
+        }
+      ]
+    },
+    "M3 \u2014 Lineage integrity": {
+      "metrics": [
+        {
+          "id": "M3.1",
+          "name": "Orphaned LinkMessageId rate",
+          "definition": "P2 finding A1 / count(LinkMessageId is non-null) * 100. References to MessageIds that don't exist in the file.",
+          "value": 5.73,
+          "unit": "pct",
+          "target": "< 1.0%",
+          "status": "RED",
+          "owner": "Producer",
+          "rationale": "Every orphaned reference is a child event the surveillance system cannot tie to its order. Lifecycle reconstruction breaks for those rows."
+        },
+        {
+          "id": "M3.2",
+          "name": "Orphaned ParentOrderId rate",
+          "definition": "P2 finding A2 / count(ParentOrderId is non-null) * 100. References to MessageIds that don't exist in the file.",
+          "value": 9.92,
+          "unit": "pct",
+          "target": "< 1.0%",
+          "status": "RED",
+          "owner": "Producer",
+          "rationale": "Breaks the textbook 'aggregate Fill <= parent volume' check (see M4.2). Producer must guarantee parent records are emitted before children."
+        },
+        {
+          "id": "M3.3",
+          "name": "Orphan-by-omission rate (children with NO upstream ref)",
+          "definition": "P2 finding A3 / count(child events) * 100. Cancel/Replace/Fill/Reject rows where BOTH LinkMessageId AND ParentOrderId are null.",
+          "value": 0.0,
+          "unit": "pct",
+          "target": "0.0%",
+          "status": "GREEN",
+          "owner": "Producer",
+          "rationale": "Hardest class of completeness gap \u2014 these rows cannot be tied to ANY order. A regulator audit will fail on these."
+        },
+        {
+          "id": "M3.4",
+          "name": "Schema misuse rate (New Order with parent)",
+          "definition": "P2 finding A4 / count(New Order rows) * 100. New Orders carrying LinkMessageId or ParentOrderId.",
+          "value": 4.89,
+          "unit": "pct",
+          "target": "0.0%",
+          "status": "RED",
+          "owner": "Producer",
+          "rationale": "Either MessageType is mislabelled or the parent column is mis-populated. Either way the surveillance system cannot trust the type label on these rows."
+        }
+      ]
+    },
+    "M4 \u2014 Lifecycle coherence": {
+      "metrics": [
+        {
+          "id": "M4.1",
+          "name": "Time-travel rate (child before parent)",
+          "definition": "P2 finding B1 / count(children with resolvable parent) * 100. Child event timestamp < parent timestamp.",
+          "value": 6.06,
+          "unit": "pct",
+          "target": "0.0%",
+          "status": "RED",
+          "owner": "Producer",
+          "rationale": "Physically impossible. Indicates either timestamp corruption (clock skew at the producer) or misassigned parent reference."
+        },
+        {
+          "id": "M4.2",
+          "name": "Over-fill rate (parents where fills > order volume)",
+          "definition": "P2 finding B2 / count(parents with at least one fill) * 100.",
+          "value": 4.4,
+          "unit": "pct",
+          "target": "0.0%",
+          "status": "RED",
+          "owner": "Producer",
+          "rationale": "Median over-fill on this dataset is 6.25% (plausible rounding); MAX is 12500.0% (impossible \u2014 corruption)."
+        },
+        {
+          "id": "M4.3",
+          "name": "Fill-after-cancel rows",
+          "definition": "P2 finding B3. Fill on a parent that was already Cancelled.",
+          "value": 1286,
+          "unit": "records",
+          "target": "Investigate (real edge cases exist)",
+          "status": "AMBER",
+          "owner": "Surveillance team",
+          "rationale": "On REAL data this is a surveillance alert (race condition or fabricated fill). On synthetic data the count is high \u2014 likely seeded. The rule is wired correctly either way."
+        },
+        {
+          "id": "M4.4",
+          "name": "Replace-without-parent rate",
+          "definition": "P2 finding B4 / count(Replace Order rows) * 100.",
+          "value": 9.9,
+          "unit": "pct",
+          "target": "0.0%",
+          "status": "RED",
+          "owner": "Producer",
+          "rationale": "Replace is meaningless without the order it's replacing \u2014 surveillance can't compare old vs new price/quantity."
+        }
+      ]
+    },
+    "M5 \u2014 Reference data stability": {
+      "metrics": [
+        {
+          "id": "M5.1",
+          "name": "Instrument->ISIN drift rate",
+          "definition": "P2 finding C1 / total distinct instruments * 100. Instruments mapped to multiple ISINs.",
+          "value": 88.8,
+          "unit": "pct",
+          "target": "< 1.0%",
+          "status": "RED",
+          "owner": "Producer",
+          "rationale": "HEADLINE DQ FINDING. Per-instrument surveillance rules (price outlier, position aggregation, market-data join) cannot fire reliably until this is resolved."
+        },
+        {
+          "id": "M5.2",
+          "name": "ISIN->Instrument drift rate",
+          "definition": "P2 finding C2 / total distinct ISINs * 100. Reverse mapping.",
+          "value": 0.0,
+          "unit": "pct",
+          "target": "0.0%",
+          "status": "GREEN",
+          "owner": "Producer",
+          "rationale": "Reverse mapping is stable on this dataset (0%). Reported here so the asymmetry with M5.1 is documented."
+        },
+        {
+          "id": "M5.3",
+          "name": "Account == CounterPartyFirm collapse rate",
+          "definition": "P2 finding D1 / total rows * 100. Account string identical to CPF string.",
+          "value": 97.37,
+          "unit": "pct",
+          "target": "< 5.0% (PROP-only is acceptable)",
+          "status": "RED",
+          "owner": "Producer",
+          "rationale": "Stage-1 profile shows Account has 1,043 distinct values vs CPF's 100, so granular accounts EXIST but are absent on 97.37% of rows. Looks like an upstream column-copy bug."
+        },
+        {
+          "id": "M5.4",
+          "name": "Non-PROP self-cross rate",
+          "definition": "Subset of M5.3 where Account prefix is not PROP. These are the wash-trade-relevant ones.",
+          "value": 61.79,
+          "unit": "pct",
+          "target": "< 0.5%",
+          "status": "RED",
+          "owner": "Producer",
+          "rationale": "PROP self-cross is legit; CLNT/BRKR/INST self-cross should be reviewed. Currently masked by M5.3 \u2014 fix M5.3 first."
+        }
+      ]
+    },
+    "M6 \u2014 Attribution coverage": {
+      "metrics": [
+        {
+          "id": "M6.1",
+          "name": "Fill attribution rate (% of fills with Trader)",
+          "definition": "100 - (E1 / count(Fill) * 100). Coverage of Reg-best-execution / MAR attribution.",
+          "value": 35.13,
+          "unit": "pct",
+          "target": ">= 95.0%",
+          "status": "RED",
+          "owner": "Producer",
+          "rationale": "REGULATOR-EXAM CRITICAL. Currently 35.13% \u2014 the surveillance system cannot attribute 65% of fills to a human."
+        },
+        {
+          "id": "M6.2",
+          "name": "New Order attribution rate",
+          "definition": "% of New Order rows with Trader populated.",
+          "value": 35.25,
+          "unit": "pct",
+          "target": ">= 95.0%",
+          "status": "RED",
+          "owner": "Producer",
+          "rationale": "Required for spoofing/layering attribution at the parent level."
+        },
+        {
+          "id": "M6.3",
+          "name": "Cancel Order attribution rate",
+          "definition": "% of Cancel Order rows with Trader populated.",
+          "value": 35.12,
+          "unit": "pct",
+          "target": ">= 95.0%",
+          "status": "RED",
+          "owner": "Producer",
+          "rationale": "Required for cancel-ratio-per-trader (F1) to be meaningful."
+        },
+        {
+          "id": "M6.4",
+          "name": "Replace Order attribution rate",
+          "definition": "% of Replace Order rows with Trader populated.",
+          "value": 36.17,
+          "unit": "pct",
+          "target": ">= 95.0%",
+          "status": "RED",
+          "owner": "Producer",
+          "rationale": "Required for modify-then-spoof / quote-stuffing detection."
+        }
+      ]
+    },
+    "M7 \u2014 Surveillance rule eligibility": {
+      "metrics": [
+        {
+          "id": "M7.1",
+          "name": "F2 (wash-trade) eligible-population rate",
+          "definition": "Fills with non-null Account + Instrument + parseable timestamp / total Fills * 100.",
+          "value": 100.0,
+          "unit": "pct",
+          "target": ">= 95.0%",
+          "status": "GREEN",
+          "owner": "Surveillance team",
+          "rationale": "Currently 60,299 of 60,299 fills are eligible. The wash-trade rule cannot fire on the rest."
+        },
+        {
+          "id": "M7.2",
+          "name": "G1 (price outlier) eligible-population rate",
+          "definition": "Rows with Price > 0 + non-null Instrument / total rows * 100.",
+          "value": 55.26,
+          "unit": "pct",
+          "target": ">= 95.0%",
+          "status": "RED",
+          "owner": "Surveillance team",
+          "rationale": "Per-instrument outlier detection has high coverage, but the per-instrument distribution is unreliable until M5.1 (Instrument->ISIN drift) is resolved."
+        },
+        {
+          "id": "M7.3",
+          "name": "B2 (over-fill) eligible-parent rate",
+          "definition": "Parents with TotalVolume + at least one fill with parseable volume / parents with TotalVolume * 100.",
+          "value": 33.77,
+          "unit": "pct",
+          "target": ">= 80.0%",
+          "status": "RED",
+          "owner": "Surveillance team",
+          "rationale": "Parents without fills are ineligible by definition \u2014 this metric only counts the rule-relevant denominator."
+        },
+        {
+          "id": "M7.4",
+          "name": "F1 (cancel ratio) eligible-trader population",
+          "definition": "Distinct Traders with at least one New Order AND at least one Cancel Order.",
+          "value": 10,
+          "unit": "traders (top-10 reported)",
+          "target": "All active traders eligible",
+          "status": "AMBER",
+          "owner": "Surveillance team",
+          "rationale": "F1 is only useful with a tuned threshold AND high Trader coverage (see M6). On this dataset top ratios are 0.68-0.72 \u2014 no spoofing pattern seeded."
+        }
+      ]
+    }
+  },
+  "summary": {
+    "total_metrics": 44,
+    "by_status": {
+      "GREEN": 21,
+      "AMBER": 6,
+      "RED": 17
+    },
+    "headline": {
+      "ingestion_parse_rate_pct": 96.69543782955878,
+      "fill_attribution_rate_pct": 35.13,
+      "instrument_isin_drift_pct": 88.8,
+      "account_cpf_collapse_pct": 97.37,
+      "lineage_orphan_parent_pct": 9.92
+    }
+  }
+}

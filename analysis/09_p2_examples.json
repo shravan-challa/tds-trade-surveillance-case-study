@@ -1,0 +1,824 @@
+{
+  "A1": [
+    {
+      "MessageId": "2026-02-05.RT015.C.501",
+      "MessageType": "Cancel Order",
+      "TransactionTime": "2026-02-05T08:00:19.267Z",
+      "Instrument": "OO",
+      "BuyOrSell": "Buy",
+      "Price": "12.36",
+      "TotalVolume": "2150.0",
+      "Account": "FIRM39.NEXUSFLUX",
+      "CounterPartyFirm": "FIRM39.NEXUSFLUX",
+      "Trader": "",
+      "LinkMessageId": "2026-02-05.RT015.P.5",
+      "ParentOrderId": "2026-02-05.RT015.P.5"
+    },
+    {
+      "MessageId": "2026-02-05.RT019.C.301",
+      "MessageType": "Cancel Order",
+      "TransactionTime": "2026-01-09T08:00:21.756Z",
+      "Instrument": "YV",
+      "BuyOrSell": "Buy",
+      "Price": "304.04",
+      "TotalVolume": "400.0",
+      "Account": "CLNT2.PEAKVAULT",
+      "CounterPartyFirm": "CLNT2.PEAKVAULT",
+      "Trader": "",
+      "LinkMessageId": "2026-02-05.RT019.P.3",
+      "ParentOrderId": "2026-02-05.RT019.P.3"
+    },
+    {
+      "MessageId": "2026-02-05.RT015.C.3601",
+      "MessageType": "Fill",
+      "TransactionTime": "2026-02-05T08:00:35.108Z",
+      "Instrument": "HN",
+      "BuyOrSell": "Sell",
+      "Price": "79.343",
+      "TotalVolume": "4200.0",
+      "Account": "INST11.FLUXBETA",
+      "CounterPartyFirm": "INST11.FLUXBETA",
+      "Trader": "",
+      "LinkMessageId": "2026-02-05.RT015.P.36",
+      "ParentOrderId": "2026-02-05.RT015.P.36"
+    },
+    {
+      "MessageId": "2026-02-05.RT009.C.9801",
+      "MessageType": "Fill",
+      "TransactionTime": "2026-02-05T08:00:46.001Z",
+      "Instrument": "SUUPR",
+      "BuyOrSell": "Buy",
+      "Price": "11.162",
+      "TotalVolume": "9500.0",
+      "Account": "BANK86.FLUXPEAK",
+      "CounterPartyFirm": "BANK86.FLUXPEAK",
+      "Trader": "",
+      "LinkMessageId": "2026-02-05.RT009.P.98",
+      "ParentOrderId": "2026-02-05.RT009.P.98"
+    },
+    {
+      "MessageId": "2026-02-05.RT011.C.13101",
+      "MessageType": "Cancel Order",
+      "TransactionTime": "2026-02-05T08:00:59.203Z",
+      "Instrument": "OO",
+      "BuyOrSell": "Buy",
+      "Price": "12.36",
+      "TotalVolume": "1700.0",
+      "Account": "FUND41.BETAPEAK",
+      "CounterPartyFirm": "FUND41.BETAPEAK",
+      "Trader": "",
+      "LinkMessageId": "2026-02-05.RT011.P.131",
+      "ParentOrderId": "2026-02-05.RT011.P.131"
+    }
+  ],
+  "A2": [
+    {
+      "MessageId": "2026-02-05.RT015.C.501",
+      "MessageType": "Cancel Order",
+      "TransactionTime": "2026-02-05T08:00:19.267Z",
+      "Instrument": "OO",
+      "BuyOrSell": "Buy",
+      "Price": "12.36",
+      "TotalVolume": "2150.0",
+      "Account": "FIRM39.NEXUSFLUX",
+      "CounterPartyFirm": "FIRM39.NEXUSFLUX",
+      "Trader": "",
+      "LinkMessageId": "2026-02-05.RT015.P.5",
+      "ParentOrderId": "2026-02-05.RT015.P.5"
+    },
+    {
+      "MessageId": "2026-02-05.RT019.C.301",
+      "MessageType": "Cancel Order",
+      "TransactionTime": "2026-01-09T08:00:21.756Z",
+      "Instrument": "YV",
+      "BuyOrSell": "Buy",
+      "Price": "304.04",
+      "TotalVolume": "400.0",
+      "Account": "CLNT2.PEAKVAULT",
+      "CounterPartyFirm": "CLNT2.PEAKVAULT",
+      "Trader": "",
+      "LinkMessageId": "2026-02-05.RT019.P.3",
+      "ParentOrderId": "2026-02-05.RT019.P.3"
+    },
+    {
+      "MessageId": "2026-02-05.RT015.C.3601",
+      "MessageType": "Fill",
+      "TransactionTime": "2026-02-05T08:00:35.108Z",
+      "Instrument": "HN",
+      "BuyOrSell": "Sell",
+      "Price": "79.343",
+      "TotalVolume": "4200.0",
+      "Account": "INST11.FLUXBETA",
+      "CounterPartyFirm": "INST11.FLUXBETA",
+      "Trader": "",
+      "LinkMessageId": "2026-02-05.RT015.P.36",
+      "ParentOrderId": "2026-02-05.RT015.P.36"
+    },
+    {
+      "MessageId": "2026-02-05.RT009.C.9801",
+      "MessageType": "Fill",
+      "TransactionTime": "2026-02-05T08:00:46.001Z",
+      "Instrument": "SUUPR",
+      "BuyOrSell": "Buy",
+      "Price": "11.162",
+      "TotalVolume": "9500.0",
+      "Account": "BANK86.FLUXPEAK",
+      "CounterPartyFirm": "BANK86.FLUXPEAK",
+      "Trader": "",
+      "LinkMessageId": "2026-02-05.RT009.P.98",
+      "ParentOrderId": "2026-02-05.RT009.P.98"
+    },
+    {
+      "MessageId": "2026-02-05.RT011.C.13101",
+      "MessageType": "Cancel Order",
+      "TransactionTime": "2026-02-05T08:00:59.203Z",
+      "Instrument": "OO",
+      "BuyOrSell": "Buy",
+      "Price": "12.36",
+      "TotalVolume": "1700.0",
+      "Account": "FUND41.BETAPEAK",
+      "CounterPartyFirm": "FUND41.BETAPEAK",
+      "Trader": "",
+      "LinkMessageId": "2026-02-05.RT011.P.131",
+      "ParentOrderId": "2026-02-05.RT011.P.131"
+    }
+  ],
+  "A3": [],
+  "A4": [
+    {
+      "MessageId": "2026-02-05.RT015.C.2902",
+      "MessageType": "New Order",
+      "TransactionTime": "2026-02-05T08:00:48.438Z",
+      "Instrument": "OO",
+      "BuyOrSell": "Buy",
+      "Price": "0.0",
+      "TotalVolume": "2000.0",
+      "Account": "PROP95.VAULTVAULT",
+      "CounterPartyFirm": "PROP95.VAULTVAULT",
+      "Trader": "TRD_13",
+      "LinkMessageId": "2026-02-05.RT015.P.29",
+      "ParentOrderId": "2026-02-05.RT015.P.29"
+    },
+    {
+      "MessageId": "2026-02-05.RT019.C.1102",
+      "MessageType": "New Order",
+      "TransactionTime": "2026-02-05T08:00:56.059Z",
+      "Instrument": "YV",
+      "BuyOrSell": "Sell",
+      "Price": "0.0",
+      "TotalVolume": "600.0",
+      "Account": "PROP95.VAULTVAULT",
+      "CounterPartyFirm": "PROP95.VAULTVAULT",
+      "Trader": "",
+      "LinkMessageId": "2026-02-05.RT019.P.11",
+      "ParentOrderId": "2026-02-05.RT019.P.11"
+    },
+    {
+      "MessageId": "2026-02-05.RT011.C.9602",
+      "MessageType": "New Order",
+      "TransactionTime": "2026-02-05T08:00:57.798Z",
+      "Instrument": "YAZ",
+      "BuyOrSell": "Buy",
+      "Price": "0.0",
+      "TotalVolume": "50.0",
+      "Account": "PROP95.VAULTVAULT",
+      "CounterPartyFirm": "PROP95.VAULTVAULT",
+      "Trader": "",
+      "LinkMessageId": "2026-02-05.RT011.P.96",
+      "ParentOrderId": "2026-02-05.RT011.P.96"
+    },
+    {
+      "MessageId": "2026-02-05.RT017.C.10002",
+      "MessageType": "New Order",
+      "TransactionTime": "2026-02-05T08:01:16.200Z",
+      "Instrument": "GJQZN",
+      "BuyOrSell": "Buy",
+      "Price": "0.0",
+      "TotalVolume": "5900.0",
+      "Account": "BRKR36.NOVAPEAK",
+      "CounterPartyFirm": "BRKR36.NOVAPEAK",
+      "Trader": "",
+      "LinkMessageId": "2026-02-05.RT017.P.100",
+      "ParentOrderId": "2026-02-05.RT017.P.100"
+    },
+    {
+      "MessageId": "2026-02-05.RT008.C.19002",
+      "MessageType": "New Order",
+      "TransactionTime": "2026-02-05T08:01:24.234Z",
+      "Instrument": "YAZ",
+      "BuyOrSell": "Sell",
+      "Price": "0.0",
+      "TotalVolume": "350.0",
+      "Account": "BANK86.FLUXPEAK",
+      "CounterPartyFirm": "BANK86.FLUXPEAK",
+      "Trader": "",
+      "LinkMessageId": "2026-02-05.RT008.P.190",
+      "ParentOrderId": "2026-02-05.RT008.P.190"
+    }
+  ],
+  "B1": [
+    {
+      "MessageId": "2026-02-05.RT016.C.5001",
+      "MessageType": "Fill",
+      "TransactionTime": "2026-01-18T08:01:19.940Z",
+      "_parent_ref": "2026-02-05.RT016.P.50",
+      "_parent_ts": "2026-02-05 08:00:19.154000+00:00",
+      "Instrument": "YAZ"
+    },
+    {
+      "MessageId": "2026-02-05.RT022.C.2302",
+      "MessageType": "Fill",
+      "TransactionTime": "2026-01-18T08:01:23.984Z",
+      "_parent_ref": "2026-02-05.RT022.P.23",
+      "_parent_ts": "2026-02-05 08:00:08.304000+00:00",
+      "Instrument": "AF"
+    },
+    {
+      "MessageId": "2026-02-05.RT015.C.20901",
+      "MessageType": "Fill",
+      "TransactionTime": "2026-02-05T08:01:39.774Z",
+      "_parent_ref": "2026-02-05.RT015.P.209",
+      "_parent_ts": "2026-02-10 08:01:21.348000+00:00",
+      "Instrument": "YAZ"
+    },
+    {
+      "MessageId": "2026-02-05.RT021.C.18601",
+      "MessageType": "Cancel Order",
+      "TransactionTime": "2026-01-13T08:01:49.214Z",
+      "_parent_ref": "2026-02-05.RT021.P.186",
+      "_parent_ts": "2026-02-05 08:01:10.269000+00:00",
+      "Instrument": "UZ"
+    },
+    {
+      "MessageId": "2026-02-05.RT019.C.27801",
+      "MessageType": "Cancel Order",
+      "TransactionTime": "2026-01-21T08:02:10.898Z",
+      "_parent_ref": "2026-02-05.RT019.P.278",
+      "_parent_ts": "2026-02-05 08:01:47.616000+00:00",
+      "Instrument": "SZY"
+    }
+  ],
+  "B2": [
+    {
+      "parent_MessageId": "2026-02-05.RT001.P.10988",
+      "order_volume": 9350.0,
+      "filled_volume": 9450.0,
+      "over_by": 100.0
+    },
+    {
+      "parent_MessageId": "2026-02-05.RT001.P.13044",
+      "order_volume": 8900.0,
+      "filled_volume": 8950.0,
+      "over_by": 50.0
+    },
+    {
+      "parent_MessageId": "2026-02-05.RT001.P.13853",
+      "order_volume": 1400.0,
+      "filled_volume": 1500.0,
+      "over_by": 100.0
+    },
+    {
+      "parent_MessageId": "2026-02-05.RT001.P.14331",
+      "order_volume": 500.0,
+      "filled_volume": 700.0,
+      "over_by": 200.0
+    },
+    {
+      "parent_MessageId": "2026-02-05.RT001.P.15151",
+      "order_volume": 100.0,
+      "filled_volume": 300.0,
+      "over_by": 200.0
+    }
+  ],
+  "B3": [
+    {
+      "MessageId": "2026-02-05.RT004.C.16601",
+      "MessageType": "Fill",
+      "TransactionTime": "2026-02-21T08:01:36.706Z",
+      "_parent_ref": "2026-02-05.RT004.P.166",
+      "_cancel_ts": "2026-02-05 08:02:09.666000+00:00"
+    },
+    {
+      "MessageId": "2026-02-05.RT025.C.14301",
+      "MessageType": "Fill",
+      "TransactionTime": "2026-02-05T08:02:30.410Z",
+      "_parent_ref": "2026-02-05.RT025.P.143",
+      "_cancel_ts": "2026-01-09 08:05:21.265000+00:00"
+    },
+    {
+      "MessageId": "2026-02-05.RT013.C.31701",
+      "MessageType": "Fill",
+      "TransactionTime": "2026-02-05T08:02:39.404Z",
+      "_parent_ref": "2026-02-05.RT013.P.317",
+      "_cancel_ts": "2026-02-05 07:58:11.105000+00:00"
+    },
+    {
+      "MessageId": "2026-02-05.RT007.C.31601",
+      "MessageType": "Fill",
+      "TransactionTime": "2026-02-05T08:02:42.387Z",
+      "_parent_ref": "2026-02-05.RT007.P.316",
+      "_cancel_ts": "2026-01-10 08:03:01.178000+00:00"
+    },
+    {
+      "MessageId": "2026-02-05.RT007.C.31602",
+      "MessageType": "Fill",
+      "TransactionTime": "2026-02-05T08:02:54.494Z",
+      "_parent_ref": "2026-02-05.RT007.P.316",
+      "_cancel_ts": "2026-01-10 08:03:01.178000+00:00"
+    }
+  ],
+  "B4": [
+    {
+      "MessageId": "2026-02-05.RT030.C.11401",
+      "MessageType": "Replace Order",
+      "TransactionTime": "2026-02-05T08:01:12.760Z",
+      "Instrument": "OO",
+      "BuyOrSell": "Buy",
+      "Price": "12.3276",
+      "TotalVolume": "5200.0",
+      "Account": "PROP95.VAULTVAULT",
+      "CounterPartyFirm": "PROP95.VAULTVAULT",
+      "Trader": "",
+      "LinkMessageId": "2026-02-05.RT030.P.114",
+      "ParentOrderId": "2026-02-05.GHOST292.P.9450112"
+    },
+    {
+      "MessageId": "2026-02-05.RT011.C.20501",
+      "MessageType": "Replace Order",
+      "TransactionTime": "2026-02-05T08:01:31.923Z",
+      "Instrument": "OT",
+      "BuyOrSell": "Sell",
+      "Price": "12.1016",
+      "TotalVolume": "5200.0",
+      "Account": "PROP95.VAULTVAULT",
+      "CounterPartyFirm": "PROP95.VAULTVAULT",
+      "Trader": "",
+      "LinkMessageId": "2026-02-05.RT011.P.205",
+      "ParentOrderId": "2026-02-05.RT011.P.205"
+    },
+    {
+      "MessageId": "2026-02-05.RT003.C.5601",
+      "MessageType": "Replace Order",
+      "TransactionTime": "2026-02-05T08:02:13.146Z",
+      "Instrument": "VC",
+      "BuyOrSell": "Buy",
+      "Price": "323.1809",
+      "TotalVolume": "5650.0",
+      "Account": "HEDG62.PULSEPEAK",
+      "CounterPartyFirm": "HEDG62.PULSEPEAK",
+      "Trader": "",
+      "LinkMessageId": "2026-02-05.RT003.P.56",
+      "ParentOrderId": "2026-02-05.GHOST307.P.9296160"
+    },
+    {
+      "MessageId": "2026-02-05.RT019.C.30601",
+      "MessageType": "Replace Order",
+      "TransactionTime": "2026-02-05T08:03:54.569Z",
+      "Instrument": "OO",
+      "BuyOrSell": "Buy",
+      "Price": "12.3004",
+      "TotalVolume": "4250.0",
+      "Account": "PROP95.VAULTVAULT",
+      "CounterPartyFirm": "PROP95.VAULTVAULT",
+      "Trader": "",
+      "LinkMessageId": "2026-02-05.RT019.P.306",
+      "ParentOrderId": "2026-02-05.GHOST308.P.9197356"
+    },
+    {
+      "MessageId": "2026-02-05.RT002.C.56101",
+      "MessageType": "Replace Order",
+      "TransactionTime": "2026-02-05T08:05:16.633Z",
+      "Instrument": "OO",
+      "BuyOrSell": "Buy",
+      "Price": "12.6118",
+      "TotalVolume": "4100.0",
+      "Account": "FIRM42.DELTASTAR",
+      "CounterPartyFirm": "FIRM42.DELTASTAR",
+      "Trader": "",
+      "LinkMessageId": "2026-02-05.RT002.P.561",
+      "ParentOrderId": "2026-02-05.GHOST541.P.9108120"
+    }
+  ],
+  "C1": [
+    {
+      "Instrument": "OO",
+      "n_distinct_ISIN": 4528
+    },
+    {
+      "Instrument": "YAZ",
+      "n_distinct_ISIN": 1553
+    },
+    {
+      "Instrument": "YV",
+      "n_distinct_ISIN": 836
+    },
+    {
+      "Instrument": "SZY",
+      "n_distinct_ISIN": 553
+    },
+    {
+      "Instrument": "HN",
+      "n_distinct_ISIN": 387
+    },
+    {
+      "Instrument": "LJ",
+      "n_distinct_ISIN": 311
+    },
+    {
+      "Instrument": "GUM",
+      "n_distinct_ISIN": 233
+    },
+    {
+      "Instrument": "TAK",
+      "n_distinct_ISIN": 181
+    },
+    {
+      "Instrument": "AF",
+      "n_distinct_ISIN": 176
+    },
+    {
+      "Instrument": "UQZAS",
+      "n_distinct_ISIN": 117
+    }
+  ],
+  "C2": [
+    {
+      "ISIN": "US001YXDDMI9",
+      "n_distinct_Instrument": 1
+    },
+    {
+      "ISIN": "US00348H5I28",
+      "n_distinct_Instrument": 1
+    },
+    {
+      "ISIN": "US003AZAD4E6",
+      "n_distinct_Instrument": 1
+    },
+    {
+      "ISIN": "US0050UV8TQ8",
+      "n_distinct_Instrument": 1
+    },
+    {
+      "ISIN": "US00ALGATHJ6",
+      "n_distinct_Instrument": 1
+    },
+    {
+      "ISIN": "US00C7GTH0C0",
+      "n_distinct_Instrument": 1
+    },
+    {
+      "ISIN": "US00FGO9DR69",
+      "n_distinct_Instrument": 1
+    },
+    {
+      "ISIN": "US00GL8M5ED7",
+      "n_distinct_Instrument": 1
+    },
+    {
+      "ISIN": "US00KV4BIZ98",
+      "n_distinct_Instrument": 1
+    },
+    {
+      "ISIN": "US00QJBDER76",
+      "n_distinct_Instrument": 1
+    }
+  ],
+  "D1": [
+    {
+      "MessageId": "2026-02-05.RT014.P.17182",
+      "MessageType": "New Order",
+      "TransactionTime": "2026-02-05T08:00:00.581Z",
+      "Instrument": "TAK",
+      "BuyOrSell": "Sell",
+      "Price": "0.0",
+      "TotalVolume": "8400.0",
+      "Account": "BRKR60.STARNEXUS",
+      "CounterPartyFirm": "BRKR60.STARNEXUS",
+      "Trader": "",
+      "LinkMessageId": "",
+      "ParentOrderId": ""
+    },
+    {
+      "MessageId": "2026-02-05.RT015.P.2",
+      "MessageType": "New Order",
+      "TransactionTime": "2026-02-05T08:00:00.901Z",
+      "Instrument": "OO",
+      "BuyOrSell": "Buy",
+      "Price": "0.0",
+      "TotalVolume": "500.0",
+      "Account": "PROP95.VAULTVAULT",
+      "CounterPartyFirm": "PROP95.VAULTVAULT",
+      "Trader": "",
+      "LinkMessageId": "",
+      "ParentOrderId": ""
+    },
+    {
+      "MessageId": "",
+      "MessageType": "New Order",
+      "TransactionTime": "2026-02-05T08:00:00.975Z",
+      "Instrument": "YV",
+      "BuyOrSell": "Buy",
+      "Price": "0.0",
+      "TotalVolume": "400.0",
+      "Account": "CLNT2.PEAKVAULT",
+      "CounterPartyFirm": "CLNT2.PEAKVAULT",
+      "Trader": "",
+      "LinkMessageId": "",
+      "ParentOrderId": ""
+    },
+    {
+      "MessageId": "2026-02-05.RT027.P.4",
+      "MessageType": "New Order",
+      "TransactionTime": "2026-02-05T08:00:01.288Z",
+      "Instrument": "OO",
+      "BuyOrSell": "Buy",
+      "Price": "0.0",
+      "TotalVolume": "5000.0",
+      "Account": "ALGO76.PULSENEXUS",
+      "CounterPartyFirm": "ALGO76.PULSENEXUS",
+      "Trader": "",
+      "LinkMessageId": "",
+      "ParentOrderId": ""
+    },
+    {
+      "MessageId": "2026-02-05.RT018.C.1255101",
+      "MessageType": "New Order",
+      "TransactionTime": "2026-02-05T08:00:01.780Z",
+      "Instrument": "OO",
+      "BuyOrSell": "Buy",
+      "Price": "0.0",
+      "TotalVolume": "2150.0",
+      "Account": "FIRM39.NEXUSFLUX",
+      "CounterPartyFirm": "FIRM39.NEXUSFLUX",
+      "Trader": "",
+      "LinkMessageId": "",
+      "ParentOrderId": ""
+    }
+  ],
+  "D1b": [
+    {
+      "MessageId": "2026-02-05.RT014.P.17182",
+      "MessageType": "New Order",
+      "TransactionTime": "2026-02-05T08:00:00.581Z",
+      "Instrument": "TAK",
+      "BuyOrSell": "Sell",
+      "Price": "0.0",
+      "TotalVolume": "8400.0",
+      "Account": "BRKR60.STARNEXUS",
+      "CounterPartyFirm": "BRKR60.STARNEXUS",
+      "Trader": "",
+      "LinkMessageId": "",
+      "ParentOrderId": ""
+    },
+    {
+      "MessageId": "",
+      "MessageType": "New Order",
+      "TransactionTime": "2026-02-05T08:00:00.975Z",
+      "Instrument": "YV",
+      "BuyOrSell": "Buy",
+      "Price": "0.0",
+      "TotalVolume": "400.0",
+      "Account": "CLNT2.PEAKVAULT",
+      "CounterPartyFirm": "CLNT2.PEAKVAULT",
+      "Trader": "",
+      "LinkMessageId": "",
+      "ParentOrderId": ""
+    },
+    {
+      "MessageId": "2026-02-05.RT027.P.4",
+      "MessageType": "New Order",
+      "TransactionTime": "2026-02-05T08:00:01.288Z",
+      "Instrument": "OO",
+      "BuyOrSell": "Buy",
+      "Price": "0.0",
+      "TotalVolume": "5000.0",
+      "Account": "ALGO76.PULSENEXUS",
+      "CounterPartyFirm": "ALGO76.PULSENEXUS",
+      "Trader": "",
+      "LinkMessageId": "",
+      "ParentOrderId": ""
+    },
+    {
+      "MessageId": "2026-02-05.RT018.C.1255101",
+      "MessageType": "New Order",
+      "TransactionTime": "2026-02-05T08:00:01.780Z",
+      "Instrument": "OO",
+      "BuyOrSell": "Buy",
+      "Price": "0.0",
+      "TotalVolume": "2150.0",
+      "Account": "FIRM39.NEXUSFLUX",
+      "CounterPartyFirm": "FIRM39.NEXUSFLUX",
+      "Trader": "",
+      "LinkMessageId": "",
+      "ParentOrderId": ""
+    },
+    {
+      "MessageId": "2026-02-05.RT010.P.7",
+      "MessageType": "New Order",
+      "TransactionTime": "2026-02-05T08:00:02.033Z",
+      "Instrument": "YAZ",
+      "BuyOrSell": "Buy",
+      "Price": "0.0",
+      "TotalVolume": "400.0",
+      "Account": "INST11.FLUXBETA",
+      "CounterPartyFirm": "INST11.FLUXBETA",
+      "Trader": "TRD_8",
+      "LinkMessageId": "",
+      "ParentOrderId": ""
+    }
+  ],
+  "E1": [
+    {
+      "MessageId": "2026-02-05.RT026.C.6901",
+      "MessageType": "Fill",
+      "TransactionTime": "2026-02-05T08:00:29.230Z",
+      "Instrument": "TAK",
+      "BuyOrSell": "Sell",
+      "Price": "98.2879",
+      "TotalVolume": "136.0",
+      "Account": "INST11.FLUXBETA",
+      "CounterPartyFirm": "INST11.FLUXBETA",
+      "Trader": "",
+      "LinkMessageId": "2026-02-05.RT026.P.69",
+      "ParentOrderId": "2026-02-05.RT026.P.69"
+    },
+    {
+      "MessageId": "2026-02-05.RT029.C.1601",
+      "MessageType": "Fill",
+      "TransactionTime": "2026-02-05T08:00:30.576Z",
+      "Instrument": "MZMHC",
+      "BuyOrSell": "Sell",
+      "Price": "9.1971",
+      "TotalVolume": "9700.0",
+      "Account": "PROP95.VAULTVAULT",
+      "CounterPartyFirm": "PROP95.VAULTVAULT",
+      "Trader": "",
+      "LinkMessageId": "2026-02-05.RT029.P.16",
+      "ParentOrderId": "2026-02-05.RT029.P.16"
+    },
+    {
+      "MessageId": "2026-02-05.RT014.C.1301",
+      "MessageType": "Fill",
+      "TransactionTime": "2026-02-05T08:00:34.662Z",
+      "Instrument": "ZX",
+      "BuyOrSell": "Buy",
+      "Price": "34.6156",
+      "TotalVolume": "892.0",
+      "Account": "INST8.NOVAGRID",
+      "CounterPartyFirm": "INST8.NOVAGRID",
+      "Trader": "",
+      "LinkMessageId": "2026-02-05.RT014.P.13",
+      "ParentOrderId": "2026-02-05.RT014.P.13"
+    },
+    {
+      "MessageId": "2026-02-05.RT015.C.3601",
+      "MessageType": "Fill",
+      "TransactionTime": "2026-02-05T08:00:35.108Z",
+      "Instrument": "HN",
+      "BuyOrSell": "Sell",
+      "Price": "79.343",
+      "TotalVolume": "4200.0",
+      "Account": "INST11.FLUXBETA",
+      "CounterPartyFirm": "INST11.FLUXBETA",
+      "Trader": "",
+      "LinkMessageId": "2026-02-05.RT015.P.36",
+      "ParentOrderId": "2026-02-05.RT015.P.36"
+    },
+    {
+      "MessageId": "2026-02-05.RT021.C.4701",
+      "MessageType": "Fill",
+      "TransactionTime": "2026-02-05T08:00:37.300Z",
+      "Instrument": "AF",
+      "BuyOrSell": "Buy",
+      "Price": "68.235",
+      "TotalVolume": "5000.0",
+      "Account": "PROP95.VAULTVAULT",
+      "CounterPartyFirm": "PROP95.VAULTVAULT",
+      "Trader": "",
+      "LinkMessageId": "2026-02-05.RT021.P.47",
+      "ParentOrderId": "2026-02-05.RT021.P.47"
+    }
+  ],
+  "F1": [],
+  "F2": [
+    {
+      "Account": "ALGO14.BETAWAVE",
+      "Instrument": "OO",
+      "MessageType": "Fill",
+      "BuyOrSell": "Sell",
+      "TransactionTime": "2026-02-05T17:36:00.465Z",
+      "Price": "12.176",
+      "TotalVolume": "253.0"
+    },
+    {
+      "Account": "ALGO14.BETAWAVE",
+      "Instrument": "OO",
+      "MessageType": "Fill",
+      "BuyOrSell": "Buy",
+      "TransactionTime": "2026-02-05T19:37:37.206Z",
+      "Price": "",
+      "TotalVolume": "1637.0"
+    },
+    {
+      "Account": "ALGO41.ALPHAPRIME",
+      "Instrument": "LJ",
+      "MessageType": "Fill",
+      "BuyOrSell": "Sell",
+      "TransactionTime": "2026-02-05T08:58:11.612Z",
+      "Price": "",
+      "TotalVolume": "425.0"
+    },
+    {
+      "Account": "ALGO41.ALPHAPRIME",
+      "Instrument": "OO",
+      "MessageType": "Fill",
+      "BuyOrSell": "Sell",
+      "TransactionTime": "2026-02-05T10:09:26.304Z",
+      "Price": "12.914",
+      "TotalVolume": "2275.0"
+    },
+    {
+      "Account": "ALGO41.ALPHAPRIME",
+      "Instrument": "OO",
+      "MessageType": "Fill",
+      "BuyOrSell": "Sell",
+      "TransactionTime": "2026-02-05T14:39:58.672Z",
+      "Price": "12.254",
+      "TotalVolume": "3780.0"
+    }
+  ],
+  "G1": [
+    {
+      "MessageId": "2026-02-05.RT015.C.2901",
+      "Instrument": "OO",
+      "Price": "11.9368",
+      "TotalVolume": "2000.0",
+      "_lo": "12.36",
+      "_hi": "12.36"
+    },
+    {
+      "MessageId": "2026-02-05.RT013.C.2601",
+      "Instrument": "OO",
+      "Price": "12.5199",
+      "TotalVolume": "500.0",
+      "_lo": "12.36",
+      "_hi": "12.36"
+    },
+    {
+      "MessageId": "2026-02-05.RT026.C.6901",
+      "Instrument": "TAK",
+      "Price": "98.2879",
+      "TotalVolume": "136.0",
+      "_lo": "100.73",
+      "_hi": "100.73"
+    },
+    {
+      "MessageId": "2026-02-05.RT015.C.3601",
+      "Instrument": "HN",
+      "Price": "79.343",
+      "TotalVolume": "4200.0",
+      "_lo": "0.72",
+      "_hi": "0.72"
+    },
+    {
+      "MessageId": "2026-02-05.RT021.C.4701",
+      "Instrument": "AF",
+      "Price": "68.235",
+      "TotalVolume": "5000.0",
+      "_lo": "71.08",
+      "_hi": "71.08"
+    }
+  ],
+  "G2": [
+    {
+      "MessageId": "2026-02-05.RT015.P.1744",
+      "Instrument": "XH",
+      "TotalVolume": "6200.0",
+      "_vhi": "2802.0"
+    },
+    {
+      "MessageId": "2026-02-05.RT015.C.174401",
+      "Instrument": "XH",
+      "TotalVolume": "6200.0",
+      "_vhi": "2802.0"
+    },
+    {
+      "MessageId": "2026-02-05.RT018.P.14688",
+      "Instrument": "ERP",
+      "TotalVolume": "6850.0",
+      "_vhi": "1391.75"
+    },
+    {
+      "MessageId": "2026-02-05.RT018.C.1468801",
+      "Instrument": "ERP",
+      "TotalVolume": "6850.0",
+      "_vhi": "1391.75"
+    },
+    {
+      "MessageId": "2026-02-05.RT003.P.15379",
+      "Instrument": "GN",
+      "TotalVolume": "8300.0",
+      "_vhi": "6400.0"
+    }
+  ]
+}

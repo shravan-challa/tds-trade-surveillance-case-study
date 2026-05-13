@@ -1,0 +1,13 @@
+{
+  "input_file_bytes": 55109785,
+  "lines_after_eol_normalisation": 250715,
+  "baseline_raw_data_lines": 250714,
+  "baseline_strict_parsed": 146304,
+  "baseline_malformed": 104410,
+  "post_repair_records_attempted": 242429,
+  "post_repair_clean_rows": 242429,
+  "post_repair_quarantine_rows": 0,
+  "recovered_rows_vs_baseline": 96125,
+  "recovery_rate_of_malformed_pct": 92.06,
+  "final_parse_rate_vs_raw_pct": 96.7
+}

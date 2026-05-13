@@ -1,0 +1,173 @@
+{
+  "input_rows": 242429,
+  "rules": [
+    {
+      "rule_id": "N1.ExchangeId",
+      "column": "ExchangeId",
+      "rationale": "Multiple null tokens for the same logical state (['', 'N/A', 'NA', 'NULL', 'NaN', 'NaT', 'None', 'n/a', 'nan', 'none', 'null'] (plus ['NONE', 'NULL', 'OO\"', 'ZZZZ'] for this field)) confuses every downstream null-check and creates spurious duplicates on PK fields.",
+      "action": "Coerce ['', 'N/A', 'NA', 'NULL', 'NaN', 'NaT', 'None', 'n/a', 'nan', 'none', 'null', 'NONE', 'NULL', 'OO\"', 'ZZZZ'] -> null",
+      "rows_affected": 4105
+    },
+    {
+      "rule_id": "N1.MessageId",
+      "column": "MessageId",
+      "rationale": "Multiple null tokens for the same logical state (['', 'N/A', 'NA', 'NULL', 'NaN', 'NaT', 'None', 'n/a', 'nan', 'none', 'null']) confuses every downstream null-check and creates spurious duplicates on PK fields.",
+      "action": "Coerce ['', 'N/A', 'NA', 'NULL', 'NaN', 'NaT', 'None', 'n/a', 'nan', 'none', 'null'] -> null",
+      "rows_affected": 4714
+    },
+    {
+      "rule_id": "N1.LinkMessageId",
+      "column": "LinkMessageId",
+      "rationale": "Multiple null tokens for the same logical state (['', 'N/A', 'NA', 'NULL', 'NaN', 'NaT', 'None', 'n/a', 'nan', 'none', 'null']) confuses every downstream null-check and creates spurious duplicates on PK fields.",
+      "action": "Coerce ['', 'N/A', 'NA', 'NULL', 'NaN', 'NaT', 'None', 'n/a', 'nan', 'none', 'null'] -> null",
+      "rows_affected": 100000
+    },
+    {
+      "rule_id": "N1.ParentOrderId",
+      "column": "ParentOrderId",
+      "rationale": "Multiple null tokens for the same logical state (['', 'N/A', 'NA', 'NULL', 'NaN', 'NaT', 'None', 'n/a', 'nan', 'none', 'null']) confuses every downstream null-check and creates spurious duplicates on PK fields.",
+      "action": "Coerce ['', 'N/A', 'NA', 'NULL', 'NaN', 'NaT', 'None', 'n/a', 'nan', 'none', 'null'] -> null",
+      "rows_affected": 100000
+    },
+    {
+      "rule_id": "N1.Trader",
+      "column": "Trader",
+      "rationale": "Multiple null tokens for the same logical state (['', 'N/A', 'NA', 'NULL', 'NaN', 'NaT', 'None', 'n/a', 'nan', 'none', 'null']) confuses every downstream null-check and creates spurious duplicates on PK fields.",
+      "action": "Coerce ['', 'N/A', 'NA', 'NULL', 'NaN', 'NaT', 'None', 'n/a', 'nan', 'none', 'null'] -> null",
+      "rows_affected": 157093
+    },
+    {
+      "rule_id": "N1.Flags",
+      "column": "Flags",
+      "rationale": "Multiple null tokens for the same logical state (['', 'N/A', 'NA', 'NULL', 'NaN', 'NaT', 'None', 'n/a', 'nan', 'none', 'null']) confuses every downstream null-check and creates spurious duplicates on PK fields.",
+      "action": "Coerce ['', 'N/A', 'NA', 'NULL', 'NaN', 'NaT', 'None', 'n/a', 'nan', 'none', 'null'] -> null",
+      "rows_affected": 231005
+    },
+    {
+      "rule_id": "N2",
+      "column": "MessageType",
+      "rationale": "Three case-variants of each enum value present ('New Order' / 'NEW ORDER' / 'new order'). Any case-sensitive downstream join, group-by, or surveillance rule will treat them as distinct event types.",
+      "action": "Coerce to Title Case (canonical form).",
+      "rows_affected": 7476
+    },
+    {
+      "rule_id": "N2b",
+      "column": "MessageType",
+      "rationale": "Values that don't match the canonical enum after case normalisation are almost certainly column-shift contamination (e.g., an ISIN sitting in the MessageType column).",
+      "action": "Flag rows where MessageType \u2209 ['Cancel Order', 'Fill', 'New Order', 'Reject', 'Replace Order'] (no value change \u2014 Stage P2 will decide on recovery vs quarantine).",
+      "rows_affected": 0
+    },
+    {
+      "rule_id": "N3a",
+      "column": "MessageDate",
+      "rationale": "\u22656 distinct date formats present in this column, including the ambiguous DD-MM vs MM-DD case. Free-form date strings break downstream date logic and surveillance windowing.",
+      "action": "Parse against an explicit format list ['%Y-%m-%d', '%d-%m-%Y', '%d-%m-%y', '%d/%m/%Y', '%m/%d/%Y', '%Y%m%d'] and re-emit as ISO YYYY-MM-DD. Per-format match counts: {\"%Y-%m-%d\": 234800, \"%d-%m-%Y\": 1591, \"%d-%m-%y\": 1564, \"%d/%m/%Y\": 2952, \"%m/%d/%Y\": 0, \"%Y%m%d\": 1522}",
+      "rows_affected": 7629
+    },
+    {
+      "rule_id": "N3b",
+      "column": "MessageDate",
+      "rationale": "Values that match NO known format (e.g., '0.0', '12.36') are column-shift artifacts where a Price value has shifted into the date column.",
+      "action": "Set unparsable values to null and flag the row.",
+      "rows_affected": 0
+    },
+    {
+      "rule_id": "N4",
+      "column": "TransactionTime",
+      "rationale": "Timestamps must be ISO-8601 with millisecond precision and Z (UTC). Non-conforming values are column-shift artifacts (top examples: 'Sell', 'Buy', 'nan').",
+      "action": "Set non-ISO timestamps to null and flag the row.",
+      "rows_affected": 0
+    },
+    {
+      "rule_id": "N5a",
+      "column": "MessageId",
+      "rationale": "Primary keys must conform to the YYYY-MM-DD.RTnnn.P.nnn pattern. Values like '100', '400' (TotalVolume) and '1700' (TotalVolume) are column-shift contamination.",
+      "action": "Set malformed PK values to null and flag the row (the row remains in the dataset but is now correctly identified as having a missing PK).",
+      "rows_affected": 0
+    },
+    {
+      "rule_id": "N5b",
+      "column": "MessageId",
+      "rationale": "Primary keys cannot be null \u2014 a record with no PK cannot be deduplicated, reconciled to upstream OMS, or referenced by downstream Cancel/Fill events.",
+      "action": "Flag rows with empty MessageId (kept in dataset but will be excluded from PK-dependent metrics in Stage P3).",
+      "rows_affected": 4714
+    },
+    {
+      "rule_id": "N5c",
+      "column": "MessageId",
+      "rationale": "Duplicate PKs imply either (a) replay-from-upstream, (b) merge artifacts from the malformed-quote contamination, or (c) seed-time duplication. Each requires a different remediation.",
+      "action": "Detected 17,671 rows participating in PK duplicates (covering 8,916 duplicate occurrences). Flagged but not modified at P1.",
+      "rows_affected": 17671
+    },
+    {
+      "rule_id": "N6",
+      "column": "ISIN",
+      "rationale": "ISIN is a 12-character ISO 6166 identifier (2-letter country + 9 alnum + check digit). Non-conforming values include 'SYS_OMEGA' (column shift from TransactionSource) and any sub-12-char strings.",
+      "action": "Set non-ISIN-shaped values to null and flag the row. NB: we validate format only, not the check-digit, in this stage.",
+      "rows_affected": 0
+    },
+    {
+      "rule_id": "N7",
+      "column": "BuyOrSell",
+      "rationale": "Side is a closed enum: ['Buy', 'Sell']. Observed contaminants include 'USD' (Currency) and 'SYS_OMEGA' (TransactionSource) \u2014 same shift signature as the other affected fields.",
+      "action": "Set non-{Buy,Sell} values to null and flag the row.",
+      "rows_affected": 0
+    },
+    {
+      "rule_id": "N8a",
+      "column": "Price",
+      "rationale": "Price must be a non-negative decimal. Non-parseable strings indicate contamination.",
+      "action": "Coerce to float; non-parseable -> null + flag.",
+      "rows_affected": 15
+    },
+    {
+      "rule_id": "N8b",
+      "column": "Price",
+      "rationale": "Negative prices are nonsensical for surveillance \u2014 a negative price cannot trigger any meaningful spoofing/layering/wash-trade rule.",
+      "action": "Set negative prices to null + flag.",
+      "rows_affected": 5944
+    },
+    {
+      "rule_id": "N9a",
+      "column": "TotalVolume",
+      "rationale": "Volume must be a positive integer; zero or negative cannot produce a surveillance event.",
+      "action": "Coerce to numeric; non-parseable or \u22640 -> null + flag.",
+      "rows_affected": 2902
+    },
+    {
+      "rule_id": "N10.ACCOUNT",
+      "column": "Account",
+      "rationale": "Format check against ^[A-Z]{3,5}\\d{1,3}\\.[A-Z]+$. Non-matching values are likely contamination or schema drift; surfaced for review.",
+      "action": "Flag-only (no value change at P1).",
+      "rows_affected": 6386
+    },
+    {
+      "rule_id": "N10.CPTY",
+      "column": "CounterPartyFirm",
+      "rationale": "Format check against ^[A-Z]{3,5}\\d{1,3}\\.[A-Z]+$. Non-matching values are likely contamination or schema drift; surfaced for review.",
+      "action": "Flag-only (no value change at P1).",
+      "rows_affected": 0
+    },
+    {
+      "rule_id": "N10.TRADER",
+      "column": "Trader",
+      "rationale": "Format check against ^TRD_\\d{1,3}$. Non-matching values are likely contamination or schema drift; surfaced for review.",
+      "action": "Flag-only (no value change at P1).",
+      "rows_affected": 0
+    },
+    {
+      "rule_id": "N10.EXCH",
+      "column": "ExchangeId",
+      "rationale": "Format check against ^[A-Z]{2,6}$. Non-matching values are likely contamination or schema drift; surfaced for review.",
+      "action": "Flag-only (no value change at P1).",
+      "rows_affected": 2688
+    },
+    {
+      "rule_id": "N11",
+      "column": "(row-level)",
+      "rationale": "A row that fails \u22652 independent format checks is almost certainly column-shifted (single random defects are unlikely to coincide). This is the population that Stage P2 will either re-align or quarantine.",
+      "action": "Compute COLUMN_SHIFT_SCORE = sum of ['FLAG_MT_UNKNOWN_ENUM', 'FLAG_DATE_UNPARSABLE', 'FLAG_TT_NOT_ISO', 'FLAG_PK_INVALID', 'FLAG_ISIN_INVALID', 'FLAG_SIDE_INVALID']. Rows with score\u22652 = 0.",
+      "rows_affected": 0
+    }
+  ]
+}
