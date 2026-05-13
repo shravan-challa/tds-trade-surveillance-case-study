@@ -59,7 +59,11 @@ python 15_generate_p3_doc.py
 python 16_generate_exec_summary.py
 ```
 
-Every artifact (TSV, JSON, docx) regenerates without manual intervention. The intermediate TSV files (`cleaned_stage_p1.tsv`, `cleaned_p1_final.tsv`, `06_row_flags.tsv`) are gitignored because they are derived; running scripts 05–06 regenerates them from `data/synthetic_trade_data.csv`.
+Every artifact (TSV, JSON, docx) regenerates without manual intervention. The pipeline outputs three TSVs that are checked in as part of the audit trail:
+
+- `analysis/cleaned_stage_p1.tsv` — output of `05_repair_structural.py` (structural repair only, before value normalisation)
+- `analysis/cleaned_p1_final.tsv` — **the P1 deliverable**: 242,429 rows after both structural repair and value normalisation, ready for ingestion
+- `analysis/06_row_flags.tsv` — per-row flag bitset showing which P1 rules fired on each row (audit trail / row-level evidence)
 
 ## Repository layout
 
